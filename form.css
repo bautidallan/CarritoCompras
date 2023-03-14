@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.inform{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.inputSubmit{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
