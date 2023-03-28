@@ -96,3 +96,10 @@ h3{
 .modal-body img{
     border-radius: 15px;
 }
+.modal-price{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
