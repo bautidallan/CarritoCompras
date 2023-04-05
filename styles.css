@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 img{
-    width: 140px;
-    height: 160px;
+    width: 160px;
+    height: 180px;
 }
 .navbar navbar-expand-lg bg-body-tertiary{
     background-color: #343a40!important;

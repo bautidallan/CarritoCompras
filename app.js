@@ -6,7 +6,7 @@ const generalPrice=document.querySelector('.card-text price');
 //Array para no duplicar productos ;
 const modalArray=[];
 
-let total=0;
+const total=0;
 
 //Funcion que busca todos los datos necesarios para añadir al carrito
 function getToCart(event){
@@ -58,7 +58,7 @@ function createNewArticle(title, price, imageSrc,total) {
     const defPrice=price.replace('$','');
     const quantity=quantityInput.value;
     const newPrice=defPrice*quantity
-    productPrice.textContent=`Price: $${newPrice}`;
+    productPrice.textContent=`Price: $ ${newPrice}`;
 
     const finalPrice=document.querySelector('.total-price').textContent;
     total=total+newPrice;
@@ -78,10 +78,9 @@ function createNewArticle(title, price, imageSrc,total) {
         modalArray.splice(indice,1); 
 
         const finalPrice=document.querySelector('.total-price').textContent;
-        const defPrice=price.replace('$','');
+        const defPrice=parseInt(price.replace('$',''));
         const quantity=quantityInput.value;
-        console.log(defPrice);
-        total=total-defPrice;
+        total=total-price;
         finalPrice.innerHTML=`Total :$${total.toFixed(2)}`;
     })
 
@@ -91,7 +90,7 @@ function createNewArticle(title, price, imageSrc,total) {
     articleShop.classList.add('article-shop');
     image.setAttribute('src', imageSrc);
     productName.textContent = `Producto: ${title}`;
-    productPrice.textContent = `Price: ${price}$`;
+    productPrice.textContent = `Price: ${price}`;
     productPrice.classList.add('article-price');
     quantityInput.setAttribute('type', 'number');
     quantityInput.setAttribute('name', 'quantity');
@@ -121,12 +120,6 @@ function createNewArticle(title, price, imageSrc,total) {
 
 // Como boton es un array de nodos debo usar un forEach para aplicar el evento a todos los nodos
 botonAñade.forEach( button=> button.addEventListener('click',getToCart) )
-
-
-
-
-
-
 
 
 
