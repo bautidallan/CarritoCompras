@@ -6,7 +6,8 @@ const generalPrice=document.querySelector('.card-text price');
 //Array para no duplicar productos ;
 const modalArray=[];
 
-const total=0;
+const totalArray=[]
+let total=0;
 
 //Funcion que busca todos los datos necesarios para añadir al carrito
 function getToCart(event){
@@ -28,12 +29,22 @@ function getToCart(event){
     }
     else{ //Si no existe lo agrego
         modalArray.push(titleName);
-        const card=createNewArticle(titleName,price,imagen,total) //Creo otra funcion,para lograr una mejor modulizacion
+        const card=createNewArticle(titleName,price,imagen) //Creo otra funcion,para lograr una mejor modulizacion
         modalBody.append(card);
+        //
+        totalArray.push(parseInt(price));
+        console.log(totalArray);
+
+        //Bloque de codigo para ir actualizando el precio
+        const initialValue = 0;
+        const sumWithInitial = totalArray.reduce(
+            (accumulator, currentValue) => accumulator + currentValue,
+            initialValue
+        );
         
         const finalPrice=document.querySelector('.total-price');
         total=total+parseInt(price);
-        finalPrice.innerHTML=`Total :$${total.toFixed(2)}`;
+        finalPrice.innerHTML=`Total :$${sumWithInitial.toFixed(2)}`;
     }
     
     
@@ -43,7 +54,7 @@ function getToCart(event){
 
 
 //Funcion que crea el divHTML para añadir al carrito 
-function createNewArticle(title, price, imageSrc,total) {
+function createNewArticle(title, price, imageSrc) {
     // create the elements
     const articleShop = document.createElement('div');
     const image = document.createElement('img');
@@ -60,10 +71,6 @@ function createNewArticle(title, price, imageSrc,total) {
     const newPrice=defPrice*quantity
     productPrice.textContent=`Price: $ ${newPrice}`;
 
-    const finalPrice=document.querySelector('.total-price').textContent;
-    total=total+newPrice;
-    console.log(total.toFixed(2));
-    finalPrice.innerHTML=`Total :$${total.toFixed(2)}`;
     })
 
     //Event listener del botton que remueve del cart shop
@@ -77,11 +84,19 @@ function createNewArticle(title, price, imageSrc,total) {
         const indice=modalArray.indexOf(title); //Busca el indice y lo elimina
         modalArray.splice(indice,1); 
 
-        const finalPrice=document.querySelector('.total-price').textContent;
-        const defPrice=parseInt(price.replace('$',''));
-        const quantity=quantityInput.value;
-        total=total-price;
-        finalPrice.innerHTML=`Total :$${total.toFixed(2)}`;
+        // Codigo para restar el precio al precio total
+
+        const indicePrice=totalArray.indexOf(price);
+        totalArray.splice(indicePrice,1);
+        const removeValue = 0;
+        const restWithValue = totalArray.reduce(
+            (accumulator, currentValue) => accumulator + currentValue,
+            removeValue
+            );
+            const finalPrice=document.querySelector('.total-price');
+            finalPrice.innerHTML=`Total :$${restWithValue.toFixed(2)}`;
+        
+        //
     })
 
     const hr = document.createElement('hr');
